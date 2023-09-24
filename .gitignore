@@ -134,3 +134,4 @@ dist
 !.env.vault
 
 .idea
+firebase-account-keys.json
