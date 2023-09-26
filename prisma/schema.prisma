@@ -10,6 +10,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-type Party {
+model Account {
+    id String @id @unique
+    name String
+    imageURL String
+    trips TripAccounts[]
+    tripsAdmin Trip[]
+}
 
+model Trip {
+    id String @id @default(uuid())
+    tripName String
+    tripImage String
+
+    // Store accounts on those that go on the trip
+    accounts TripAccounts[]
+
+    // Store admin data on who created the trip
+    admin Account @relation(fields: [adminID], references: [id])
+    adminID String
+
+    // Store info on when the trip "plan" was created
+    created DateTime @default(now())
+}
+
+model TripAccounts {
+    account     Account @relation(fields: [accountID], references: [id])
+    accountID   String
+    trip        Trip  @relation(fields: [tripID], references: [id])
+    tripID      String
+
+    @@id([accountID, tripID])
 }
