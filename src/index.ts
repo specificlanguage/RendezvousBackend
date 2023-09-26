@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { usersRouter } from "./users/router";
+import { usersRouter } from "./user/router";
 
 const app = express();
 const port = 3000;
