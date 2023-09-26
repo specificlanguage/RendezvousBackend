@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { usersRouter } from "./user/router";
+import { tripRouter } from "./trip/router";
 
 const app = express();
 const port = 3000;
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/user", usersRouter);
+app.use("/trip", tripRouter);
 
 app.listen(port, () => {
     console.log(`Rendezvous backend is running on port ${port}`);
