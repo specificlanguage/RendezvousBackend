@@ -13,7 +13,7 @@ datasource db {
 model Account {
     id String @id @unique
     name String
-    imageURL String
+    imageURL String?
     trips TripAccounts[]
     tripsAdmin Trip[]
 }
