@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import { prisma } from "../db/prisma";
 
 interface SignupBody {
     name: string;
@@ -7,9 +8,7 @@ interface SignupBody {
 
 export async function Signup(req: Request, res: Response) {
     const userId = res.locals.userID;
-    console.log(req.body);
     const { name } = req.body as SignupBody;
-    const prisma = new PrismaClient();
 
     try {
         const account = await prisma.account.findFirstOrThrow({
