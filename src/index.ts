@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 import { usersRouter } from "./users/router";
 
 const app = express();
@@ -8,22 +7,12 @@ const port = 3000;
 
 app.use(
     cors({
+        origin: process.env.FRONTEND_URL,
         credentials: true,
-        origin: "*",
-        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-        allowedHeaders: [
-            "Authorization",
-            "Origin",
-            "X-Requested-With",
-            "Content-Type",
-            "Accept",
-            "Access-Control-Request-Method",
-            "Access-Control-Request-Headers",
-            "Cache-Control",
-        ],
+        allowedHeaders: ["Content-Type, Authorization"],
     }),
 );
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get("/", (req, res) => {
     res.json({

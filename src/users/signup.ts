@@ -16,8 +16,6 @@ export async function Signup(req: Request, res: Response) {
             where: { id: userId },
         });
 
-        console.log("found", account);
-
         if (account) {
             res.status(500).json({
                 message: "User exists",
@@ -28,9 +26,8 @@ export async function Signup(req: Request, res: Response) {
             res.status(400).json({
                 message: "Name needed in body",
             });
+            return;
         }
-
-        console.log("not found", userId, "creating");
 
         await prisma.account.create({
             data: {

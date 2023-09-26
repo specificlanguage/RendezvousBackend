@@ -14,7 +14,6 @@ export function AuthMiddleware(
     res: Response,
     next: NextFunction,
 ) {
-    console.log(req.headers);
     const idToken = req.headers.authorization?.split(" ")[1] ?? "";
     auth.verifyIdToken(idToken)
         .then((decodedToken) => {
