@@ -7,8 +7,6 @@ export async function GetUser(req: Request, res: Response) {
         userID = req.params.userID;
     }
 
-    console.log(userID);
-
     const account = await prisma.account.findFirst({
         where: {
             id: {
