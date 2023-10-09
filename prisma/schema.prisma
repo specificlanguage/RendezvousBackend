@@ -21,7 +21,7 @@ model Account {
 model Trip {
     id String @id @default(uuid())
     tripName String
-    tripImage String
+    tripImage String?
 
     // Store accounts on those that go on the trip
     accounts TripAccounts[]
@@ -32,6 +32,8 @@ model Trip {
 
     // Store info on when the trip "plan" was created
     created DateTime @default(now())
+    startDate DateTime	@db.Date
+    endDate DateTime 	@db.Date
 }
 
 model TripAccounts {
