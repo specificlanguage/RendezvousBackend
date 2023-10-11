@@ -12,6 +12,7 @@ datasource db {
 
 model Account {
   id         String         @id @unique
+  email      String
   name       String
   imageURL   String?
   trips      TripAccounts[]

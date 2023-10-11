@@ -3,11 +3,12 @@ import { prisma } from "../db/prisma";
 
 interface SignupBody {
     name: string;
+    email: string;
 }
 
 export async function Signup(req: Request, res: Response) {
     const userId = res.locals.userID;
-    const { name } = req.body as SignupBody;
+    const { name, email } = req.body as SignupBody;
 
     try {
         const account = await prisma.account.findFirstOrThrow({
@@ -31,6 +32,7 @@ export async function Signup(req: Request, res: Response) {
             data: {
                 id: userId,
                 name: name,
+                email: email,
             },
         });
         res.status(201).json({ name: name });
