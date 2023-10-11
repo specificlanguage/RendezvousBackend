@@ -38,6 +38,7 @@ model Trip {
 
   // Add locations to the trip
   locations Location[]
+  invites   TripInvite[]
 
 }
 
@@ -57,4 +58,12 @@ model Location {
     placeID    String              @unique
     name       String
     trips      Trip[]
+}
+
+model TripInvite {
+    email       String
+    trip        Trip @relation(fields: [tripID], references: [id])
+    tripID      String
+
+    @@id([email, tripID])
 }
