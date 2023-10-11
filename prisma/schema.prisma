@@ -54,7 +54,7 @@ model Location {
     id         Int                 @id @default(autoincrement())
     lat        Float
     long       Float
-    placeID    String
+    placeID    String              @unique
     name       String
     trips      Trip[]
 }

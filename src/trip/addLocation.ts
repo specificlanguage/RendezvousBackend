@@ -58,12 +58,17 @@ export async function AddLocations(req: Request, res: Response) {
         },
         data: {
             locations: {
-                create: locations.map((loc) => {
+                connectOrCreate: locations.map((loc) => {
                     return {
-                        lat: loc.lat ?? 0,
-                        long: loc.long ?? 0,
-                        placeID: loc.place_id,
-                        name: loc.description,
+                        where: {
+                            placeID: loc.place_id,
+                        },
+                        create: {
+                            lat: loc.lat ?? 0,
+                            long: loc.long ?? 0,
+                            placeID: loc.place_id,
+                            name: loc.description,
+                        },
                     };
                 }),
             },
