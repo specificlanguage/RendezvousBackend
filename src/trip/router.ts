@@ -3,6 +3,7 @@ import { AuthMiddleware } from "../user/authorize";
 import { GetAllTrips } from "./getAllTrips";
 import { AutoCompleteLocation } from "./findLocation";
 import { CreateTrip } from "./createTrip";
+import { AddLocations } from "./addLocation";
 
 export const tripRouter = express.Router();
 
@@ -12,3 +13,4 @@ tripRouter.use(AuthMiddleware);
 tripRouter.get("/", GetAllTrips);
 tripRouter.post("/findLocation", AutoCompleteLocation);
 tripRouter.post("/create", CreateTrip);
+tripRouter.post("/locations", AddLocations);

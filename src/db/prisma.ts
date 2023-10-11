@@ -9,3 +9,14 @@ export async function getAccount(id: string): Promise<Account | null> {
         },
     });
 }
+
+export async function isAdmin(uid: string, tripid: string): Promise<boolean> {
+    const res = await prisma.trip.findFirst({
+        where: {
+            id: tripid,
+            adminID: uid,
+        },
+    });
+
+    return !!res;
+}

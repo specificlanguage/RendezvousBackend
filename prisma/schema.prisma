@@ -11,36 +11,49 @@ datasource db {
 }
 
 model Account {
-    id String @id @unique
-    name String
-    imageURL String?
-    trips TripAccounts[]
-    tripsAdmin Trip[]
+  id         String         @id @unique
+  name       String
+  imageURL   String?
+  trips      TripAccounts[]
+  tripsAdmin Trip[]
 }
 
 model Trip {
-    id String @id @default(uuid())
-    tripName String
-    tripImage String?
+  id        String  @id @default(uuid())
+  tripName  String
+  tripImage String?
 
-    // Store accounts on those that go on the trip
-    accounts TripAccounts[]
+  // Store accounts on those that go on the trip
+  accounts TripAccounts[]
 
-    // Store admin data on who created the trip
-    admin Account @relation(fields: [adminID], references: [id])
-    adminID String
+  // Store admin data on who created the trip
+  admin   Account @relation(fields: [adminID], references: [id])
+  adminID String
 
-    // Store info on when the trip "plan" was created
-    created DateTime @default(now())
-    startDate DateTime	@db.Date
-    endDate DateTime 	@db.Date
+  // Store info on when the trip "plan" was created
+  created   DateTime @default(now())
+  startDate DateTime @db.Date
+  endDate   DateTime @db.Date
+
+  // Add locations to the trip
+  locations Location[]
+
 }
 
 model TripAccounts {
-    account     Account @relation(fields: [accountID], references: [id])
-    accountID   String
-    trip        Trip  @relation(fields: [tripID], references: [id])
-    tripID      String
+  account   Account @relation(fields: [accountID], references: [id])
+  accountID String
+  trip      Trip    @relation(fields: [tripID], references: [id])
+  tripID    String
 
-    @@id([accountID, tripID])
+  @@id([accountID, tripID])
+}
+
+model Location {
+    id         Int                 @id @default(autoincrement())
+    lat        Float
+    long       Float
+    placeID    String
+    name       String
+    trips      Trip[]
 }
