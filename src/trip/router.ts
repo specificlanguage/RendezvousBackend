@@ -4,6 +4,7 @@ import { GetAllTrips } from "./getAllTrips";
 import { AutoCompleteLocation } from "./findLocation";
 import { CreateTrip } from "./createTrip";
 import { AddLocations } from "./addLocation";
+import { InviteUsers } from "./invite";
 
 export const tripRouter = express.Router();
 
@@ -14,3 +15,4 @@ tripRouter.get("/", GetAllTrips);
 tripRouter.post("/findLocation", AutoCompleteLocation);
 tripRouter.post("/create", CreateTrip);
 tripRouter.post("/locations", AddLocations);
+tripRouter.post("/invite", InviteUsers);
