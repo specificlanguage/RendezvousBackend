@@ -40,3 +40,13 @@ export async function isInTrip(uid: string, tripid: string): Promise<boolean> {
         });
     return isInTrip != null;
 }
+
+export async function tripExists(tripID: string): Promise<boolean> {
+    return (
+        (await prisma.trip.findFirst({
+            where: {
+                id: tripID,
+            },
+        })) != null
+    );
+}
