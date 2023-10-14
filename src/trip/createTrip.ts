@@ -14,7 +14,7 @@ export async function CreateTrip(req: Request, res: Response) {
     const { tripName, startDate, endDate } = req.body as CreateTripBody;
 
     if (account === null) {
-        res.status(400).json({ message: "Not logged in" });
+        res.status(403).json({ message: "Not logged in" });
         return;
     }
 
@@ -45,7 +45,7 @@ export async function CreateTrip(req: Request, res: Response) {
         },
     });
 
-    res.json({
+    res.status(201).json({
         id: trip.id,
         name: tripName,
     });
