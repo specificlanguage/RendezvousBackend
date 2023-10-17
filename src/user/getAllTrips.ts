@@ -14,6 +14,9 @@ export async function GetAllTrips(req: Request, res: Response) {
                 },
             },
         },
+        select: {
+            id: true,
+        },
     });
 
     res.json({ trips: trips });

@@ -46,7 +46,7 @@ export async function GetSingleTrip(req: Request, res: Response) {
 
     res.status(200).json({
         ...trip,
-        users,
+        users: users.map((usr) => usr.id),
         locations: locations.map((loc) => loc.name),
     });
 }
