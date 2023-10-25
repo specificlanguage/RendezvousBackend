@@ -12,8 +12,11 @@ dependencies:
     specifier: ^3.3.38
     version: 3.3.38
   '@prisma/client':
-    specifier: 5.3.1
-    version: 5.3.1(prisma@5.4.2)
+    specifier: 5.5.2
+    version: 5.5.2(prisma@5.5.2)
+  '@sendgrid/mail':
+    specifier: ^7.7.0
+    version: 7.7.0
   '@types/node':
     specifier: ^20.6.3
     version: 20.6.3
@@ -71,8 +74,8 @@ devDependencies:
     specifier: ^3.0.3
     version: 3.0.3
   prisma:
-    specifier: ^5.4.2
-    version: 5.4.2
+    specifier: ^5.5.2
+    version: 5.5.2
 
 packages:
 
@@ -421,8 +424,8 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@prisma/client@5.3.1(prisma@5.4.2):
-    resolution: {integrity: sha512-ArOKjHwdFZIe1cGU56oIfy7wRuTn0FfZjGuU/AjgEBOQh+4rDkB6nF+AGHP8KaVpkBIiHGPQh3IpwQ3xDMdO0Q==}
+  /@prisma/client@5.5.2(prisma@5.5.2):
+    resolution: {integrity: sha512-54XkqR8M+fxbzYqe+bIXimYnkkcGqgOh0dn0yWtIk6CQT4IUCAvNFNcQZwk2KqaLU+/1PHTSWrcHtx4XjluR5w==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
@@ -431,16 +434,16 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 5.3.1-2.61e140623197a131c2a6189271ffee05a7aa9a59
-      prisma: 5.4.2
+      '@prisma/engines-version': 5.5.1-1.aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a
+      prisma: 5.5.2
     dev: false
 
-  /@prisma/engines-version@5.3.1-2.61e140623197a131c2a6189271ffee05a7aa9a59:
-    resolution: {integrity: sha512-y5qbUi3ql2Xg7XraqcXEdMHh0MocBfnBzDn5GbV1xk23S3Mq8MGs+VjacTNiBh3dtEdUERCrUUG7Z3QaJ+h79w==}
+  /@prisma/engines-version@5.5.1-1.aebc046ce8b88ebbcb45efe31cbe7d06fd6abc0a:
+    resolution: {integrity: sha512-O+qHFnZvAyOFk1tUco2/VdiqS0ym42a3+6CYLScllmnpbyiTplgyLt2rK/B9BTjYkSHjrgMhkG47S0oqzdIckA==}
     dev: false
 
-  /@prisma/engines@5.4.2:
-    resolution: {integrity: sha512-fqeucJ3LH0e1eyFdT0zRx+oETLancu5+n4lhiYECyEz6H2RDskPJHJYHkVc0LhkU4Uv7fuEnppKU3nVKNzMh8g==}
+  /@prisma/engines@5.5.2:
+    resolution: {integrity: sha512-Be5hoNF8k+lkB3uEMiCHbhbfF6aj1GnrTBnn5iYFT7GEr3TsOEp1soviEcBR0tYCgHbxjcIxJMhdbvxALJhAqg==}
     requiresBuild: true
 
   /@protobufjs/aspromise@1.1.2:
@@ -505,6 +508,33 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@sendgrid/client@7.7.0:
+    resolution: {integrity: sha512-SxH+y8jeAQSnDavrTD0uGDXYIIkFylCo+eDofVmZLQ0f862nnqbC3Vd1ej6b7Le7lboyzQF6F7Fodv02rYspuA==}
+    engines: {node: 6.* || 8.* || >=10.*}
+    dependencies:
+      '@sendgrid/helpers': 7.7.0
+      axios: 0.26.1
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /@sendgrid/helpers@7.7.0:
+    resolution: {integrity: sha512-3AsAxfN3GDBcXoZ/y1mzAAbKzTtUZ5+ZrHOmWQ279AuaFXUNCh9bPnRpN504bgveTqoW+11IzPg3I0WVgDINpw==}
+    engines: {node: '>= 6.0.0'}
+    dependencies:
+      deepmerge: 4.3.1
+    dev: false
+
+  /@sendgrid/mail@7.7.0:
+    resolution: {integrity: sha512-5+nApPE9wINBvHSUxwOxkkQqM/IAAaBYoP9hw7WwgDNQPxraruVqHizeTitVtKGiqWCKm2mnjh4XGN3fvFLqaw==}
+    engines: {node: 6.* || 8.* || >=10.*}
+    dependencies:
+      '@sendgrid/client': 7.7.0
+      '@sendgrid/helpers': 7.7.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /@tootallnate/once@2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
@@ -925,6 +955,14 @@ packages:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
     dev: false
 
+  /axios@0.26.1:
+    resolution: {integrity: sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==}
+    dependencies:
+      follow-redirects: 1.15.3
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /axios@0.27.2:
     resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
     dependencies:
@@ -1196,6 +1234,11 @@ packages:
 
   /deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
+
+  /deepmerge@4.3.1:
+    resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /default-browser-id@3.0.0:
     resolution: {integrity: sha512-OZ1y3y0SqSICtE8DE4S8YOE9UZOJ8wO16fKWVP5J1Qz42kV9jcnMVFrEE/noXb/ss3Q4pZIH79kxofzyNNtUNA==}
@@ -2801,13 +2844,13 @@ packages:
     hasBin: true
     dev: true
 
-  /prisma@5.4.2:
-    resolution: {integrity: sha512-GDMZwZy7mysB2oXU+angQqJ90iaPFdD0rHaZNkn+dio5NRkGLmMqmXs31//tg/qXT3iB0cTQwnGGQNuirhSTZg==}
+  /prisma@5.5.2:
+    resolution: {integrity: sha512-WQtG6fevOL053yoPl6dbHV+IWgKo25IRN4/pwAGqcWmg7CrtoCzvbDbN9fXUc7QS2KK0LimHIqLsaCOX/vHl8w==}
     engines: {node: '>=16.13'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 5.4.2
+      '@prisma/engines': 5.5.2
 
   /proto3-json-serializer@1.1.1:
     resolution: {integrity: sha512-AwAuY4g9nxx0u52DnSMkqqgyLHaW/XaPLtaAo3y/ZCfeaQB/g4YDH4kb8Wc/mWzWvu0YjOznVnfn373MVZZrgw==}

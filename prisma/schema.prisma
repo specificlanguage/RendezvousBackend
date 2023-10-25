@@ -61,9 +61,8 @@ model Location {
 }
 
 model TripInvite {
-    email       String
+    id          String @id @default(uuid())
     trip        Trip @relation(fields: [tripID], references: [id])
     tripID      String
-
-    @@id([email, tripID])
+    created     DateTime @default(now())
 }
