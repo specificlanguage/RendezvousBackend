@@ -31,13 +31,7 @@ export async function InviteUsers(req: Request, res: Response) {
         },
         data: {
             invites: {
-                create: emails.map((email) => {
-                    return {
-                        create: {
-                            email,
-                        },
-                    };
-                }),
+                create: emails.map((email) => ({ email })),
             },
         },
     });
@@ -85,6 +79,15 @@ export async function AcceptInvite(req: Request, res: Response) {
     }
 
     let trip = undefined;
+
+    // Check if user is already in trip
+    if (await isInTrip(accountID, tripInvite.tripID)) {
+        res.status(202).json({
+            tripID: tripInvite.tripID,
+            message: "Error when adding to trip, try again",
+        });
+        return;
+    }
 
     try {
         // Connect user to trip
