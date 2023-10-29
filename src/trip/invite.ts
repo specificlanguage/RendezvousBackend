@@ -24,7 +24,25 @@ export async function InviteUsers(req: Request, res: Response) {
         return;
     }
 
-    // Create invite
+    // Check if invite has already been sent for trip
+    const alreadyInvited = await prisma.tripInvite
+        .findMany({
+            where: {
+                tripID,
+                email: {
+                    in: emails,
+                },
+            },
+            select: {
+                email: true,
+            },
+        })
+        .then((res) => res.map((r) => r.email));
+
+    // TODO: resend email if invite has already been sent.
+    emails.filter((email) => alreadyInvited.includes(email) === false);
+
+    // Create invite if invite does not exist
     await prisma.trip.update({
         where: {
             id: tripID,
