@@ -1,7 +1,7 @@
 import express from "express";
 import { AuthMiddleware } from "./authorize";
 import { Signup } from "./signup";
-import { GetUser } from "./get";
+import { GetUser, GetUsers } from "./get";
 import { GetAllTrips } from "./getAllTrips";
 
 export const usersRouter = express.Router();
@@ -12,6 +12,7 @@ usersRouter.use(AuthMiddleware);
 usersRouter.get("/", GetUser);
 usersRouter.get("/get", GetUser);
 usersRouter.get("/get/:userID", GetUser);
+usersRouter.post("/getUsers", GetUsers);
 
 // Signups the user into the database (actual security does not happen here, it happens in firebase.)
 usersRouter.post("/signup", Signup);
