@@ -132,6 +132,7 @@ dist
 .flaskenv*
 !.env.project
 !.env.vault
+!.env.example
 
 .idea
 firebase-account-keys.json

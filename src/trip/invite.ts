@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { getAccount, isInTrip, prisma } from "../db/prisma";
+import axios from "axios";
 
 export interface InviteUsersBody {
     tripID: string;
@@ -39,23 +40,54 @@ export async function InviteUsers(req: Request, res: Response) {
         })
         .then((res) => res.map((r) => r.email));
 
-    // TODO: resend email if invite has already been sent.
-    emails.filter((email) => alreadyInvited.includes(email) === false);
+    const emailsToSend = emails.filter(
+        (email) => alreadyInvited.includes(email) === false,
+    );
 
     // Create invite if invite does not exist
-    await prisma.trip.update({
+    // Note that this query creates the invites and returns trip data.
+    const tripData = await prisma.trip.update({
         where: {
             id: tripID,
         },
         data: {
             invites: {
-                create: emails.map((email) => ({ email })),
+                create: emailsToSend.map((email) => ({ email })),
             },
+        },
+        select: {
+            tripName: true,
         },
     });
 
-    // TODO: When a user creates an account, automatically associate them with the trip
-    res.status(200).json({ message: "Invite sent*" });
+    const invites = await prisma.tripInvite.findMany({
+        where: {
+            tripID,
+            email: {
+                in: emails,
+            },
+        },
+        select: {
+            email: true,
+            id: true,
+        },
+    });
+
+    invites.map((i: { email: string; id: string }) => {
+        axios({
+            url: `${process.env.EMAIL_SERVICE_URL}/invite`,
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            data: JSON.stringify({
+                toEmail: i.email,
+                tripName: tripData.tripName,
+                inviteID: i.id,
+                inviter: account.name,
+            }),
+        });
+    });
+
+    res.status(200).json({ message: "Invites sent" });
 }
 
 export async function GetInvite(req: Request, res: Response) {
