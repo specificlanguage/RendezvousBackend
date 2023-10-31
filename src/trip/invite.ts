@@ -84,7 +84,7 @@ export async function InviteUsers(req: Request, res: Response) {
                 inviteID: i.id,
                 inviter: account.name,
             }),
-        });
+        }).catch((e) => console.log(e)); // No shutdowns
     });
 
     res.status(200).json({ message: "Invites sent" });
