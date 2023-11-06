@@ -6,6 +6,7 @@ import { AcceptInvite, GetInvite, InviteUsers } from "./invite";
 import { GetUsersOnTrip } from "./getUsersOnTrip";
 import { GetSingleTrip } from "./getTrip";
 import { except } from "../utils/expressUtils";
+import { GetAllFlights } from "./getFlights";
 
 export const tripRouter = express.Router();
 
@@ -23,3 +24,4 @@ tripRouter.get("/users", GetUsersOnTrip);
 // Invite routes
 tripRouter.get("/invite/:inviteID", GetInvite); // Excepted
 tripRouter.put("/invite/:inviteID", AcceptInvite);
+tripRouter.get("/flights", GetAllFlights);

@@ -50,3 +50,12 @@ export async function tripExists(tripID: string): Promise<boolean> {
         })) != null
     );
 }
+
+export async function getFlights(tripID: string, userID?: string) {
+    return await prisma.flight.findMany({
+        where: {
+            tripID,
+            ...(userID ? { passengers: { some: { id: userID } } } : {}),
+        },
+    });
+}

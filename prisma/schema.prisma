@@ -17,6 +17,7 @@ model Account {
   imageURL   String?
   trips      TripAccounts[]
   tripsAdmin Trip[]
+  flights    Flight[]
 }
 
 model Trip {
@@ -40,6 +41,7 @@ model Trip {
   locations Location[]
   invites   TripInvite[]
 
+  Flight Flight[]
 }
 
 model TripAccounts {
@@ -52,18 +54,28 @@ model TripAccounts {
 }
 
 model Location {
-    id         Int                 @id @default(autoincrement())
-    lat        Float
-    long       Float
-    placeID    String              @unique
-    name       String
-    trips      Trip[]
+  id      Int    @id @default(autoincrement())
+  lat     Float
+  long    Float
+  placeID String @unique
+  name    String
+  trips   Trip[]
 }
 
 model TripInvite {
-    id          String @id @default(uuid())
-    email       String
-    trip        Trip @relation(fields: [tripID], references: [id])
-    tripID      String
-    created     DateTime @default(now())
+  id      String   @id @default(uuid())
+  email   String
+  trip    Trip     @relation(fields: [tripID], references: [id])
+  tripID  String
+  created DateTime @default(now())
+}
+
+model Flight {
+  id          String    @id @default(uuid())
+  trip        Trip      @relation(fields: [tripID], references: [id])
+  tripID      String
+  carrierCode String
+  flightNum   Int
+  passengers  Account[]
+  public      Boolean
 }
