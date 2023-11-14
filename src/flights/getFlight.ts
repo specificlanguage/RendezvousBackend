@@ -11,7 +11,6 @@ export async function getFlightInfo(
     icaoCode: string,
     flightNum: number,
 ) {
-    console.log(flightNum);
     return await AMADEUS.client.get("/v2/schedule/flights", {
         carrierCode: icaoCode,
         flightNumber: flightNum,
@@ -23,7 +22,12 @@ export async function GetFlight(req: Request, res: Response) {
     const { flightNumber, carrierCode, scheduledDate } =
         req.query as FlightQuery;
 
-    console.log(scheduledDate, flightNumber);
+    const depDate = new Date(scheduledDate);
+    if (depDate <= new Date()) {
+        // today
+        res.status(400).json({ message: "Use date after today" });
+        return;
+    }
 
     const flight = await getFlightInfo(
         new Date(scheduledDate),
