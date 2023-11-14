@@ -11,6 +11,7 @@ export async function getFlightInfo(
     icaoCode: string,
     flightNum: number,
 ) {
+    console.log(flightNum);
     return await AMADEUS.client.get("/v2/schedule/flights", {
         carrierCode: icaoCode,
         flightNumber: flightNum,
@@ -22,13 +23,13 @@ export async function GetFlight(req: Request, res: Response) {
     const { flightNumber, carrierCode, scheduledDate } =
         req.query as FlightQuery;
 
-    console.log(scheduledDate);
+    console.log(scheduledDate, flightNumber);
 
     const flight = await getFlightInfo(
         new Date(scheduledDate),
         carrierCode,
         parseInt(flightNumber),
-    );
+    ).catch((e) => console.log(e));
 
     if (flight.result.data == undefined || flight.result.data.length < 1) {
         res.status(204);

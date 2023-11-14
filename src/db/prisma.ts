@@ -59,3 +59,11 @@ export async function getFlights(tripID: string, userID?: string) {
         },
     });
 }
+
+export async function getTrip(tripID: string) {
+    return await prisma.trip.findFirst({
+        where: {
+            id: tripID,
+        },
+    });
+}

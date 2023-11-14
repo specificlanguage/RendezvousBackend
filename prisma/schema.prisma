@@ -78,4 +78,8 @@ model Flight {
   flightNum   Int
   passengers  Account[]
   public      Boolean
+  origin      String
+  destination String
+  departureTime DateTime @db.Timestamp
+  arrivalTime   DateTime @db.Timestamp
 }
