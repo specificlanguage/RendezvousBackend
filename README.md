@@ -2,7 +2,7 @@
 
 > book travel easily with others
 
-This is the backend to a webapp] intended to work with travel with others, providing a little more information to coordinate travel between other users, whether for flights, and hotels. It's a bit of a work in progress and to me it's a little of ambitious side project I'm slowly working on over the past couple months. Eventually, this would be nice as a fully deployed app, but documentation for flight and hotel search and booking is [very cumbersome](https://amadeus4dev.github.io/developer-guides/resources/flights/#search-by-radius) and hard to come by, so development is pretty slow, unfortunately.
+This is the backend to a [webapp](https://github.com/specificlanguage/Rendezvous) intended to work with travel with others, providing a little more information to coordinate travel between other users, whether for flights, and hotels. It's a bit of a work in progress and to me it's a little of ambitious side project I'm slowly working on over the past couple months. Eventually, this would be nice as a fully deployed app, but documentation for flight and hotel search and booking is [very cumbersome](https://amadeus4dev.github.io/developer-guides/resources/flights/#search-by-radius) and hard to come by, so development is pretty slow, unfortunately.
 
 It's using primarily using Express, with Prisma, Amadeus, Duffel and Firebase used in various capacities. You may also want to checkout the [frontend repository](https://github.com/specificlanguage/Rendezvous)
 
